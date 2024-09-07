@@ -152,24 +152,55 @@ class MainViewModel() : ViewModel(){
                 }
             }
     }
+//    fun createAccountAndLinkPhone(name: String, email: String, password: String, onResult: (Boolean) -> Unit) {
+//    credential = PhoneAuthProvider.getCredential(verificationID.value, otp.value)
+//        if (this::credential.isInitialized) {
+//            _myAuth.createUserWithEmailAndPassword(email, password)
+//                .addOnCompleteListener { authTask ->
+//                    if (authTask.isSuccessful) {val user = _myAuth.currentUser
+//                        val profileUpdates = UserProfileChangeRequest.Builder()
+//                            .setDisplayName(name)
+//                            .build()
+//
+//                        user?.updateProfile(profileUpdates)
+//                            ?.addOnCompleteListener { profileTask ->
+//                                if (profileTask.isSuccessful) {
+//                                    user.linkWithCredential(credential)
+//                                        .addOnCompleteListener { linkTask ->
+//                                            onResult(linkTask.isSuccessful)
+//                                        }
+//                                } else {
+//                                    Log.e("MainViewModel", "Profile update failed: ${profileTask.exception?.message}")
+//                                    onResult(false)
+//                                }
+//                            }
+//                    } else {
+//                        Log.e("MainViewModel", "Account creation failed: ${authTask.exception?.message}")
+//                        onResult(false)
+//                    }
+//                }
+//        } else {
+//            Log.e("MainViewModel", "Phone credential is not initialized.")
+//            onResult(false)
+//        }
+//    }
 
-    private fun linkPhoneCredential(onResult: (Boolean) -> Unit) {
+    fun linkPhoneCredential(onResult: (Boolean) -> Unit) {
         val user = _myAuth.currentUser
         val credential_email = EmailAuthProvider.getCredential(email.value , password.value)
-        if (this::credential.isInitialized) {
             user?.linkWithCredential(credential_email)
                 ?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         onResult(true)
                     } else {
-                        Log.e("MainViewModel", "Linking phone credential failed: ${task.exception?.message}", task.exception)
+                        Log.e(
+                            "MainViewModel",
+                            "Linking phone credential failed: ${task.exception?.message}",
+                            task.exception
+                        )
                         onResult(false)
                     }
                 }
-        } else {
-            Log.e("MainViewModel", "Phone credential is not initialized.")
-            onResult(false)
-        }
     }
 
 

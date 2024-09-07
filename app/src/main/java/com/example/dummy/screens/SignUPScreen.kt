@@ -29,6 +29,7 @@ import com.example.dummy.viewModels.MainViewModel
 
 @Composable
 fun SignUpScreen(modifier: Modifier = Modifier , viewModel: MainViewModel , navController: NavController) {
+    var name by remember { mutableStateOf("") }
     val email = viewModel.email
     val password = viewModel.password
 
@@ -67,7 +68,7 @@ fun SignUpScreen(modifier: Modifier = Modifier , viewModel: MainViewModel , navC
         )
 
         Button(onClick = {
-            viewModel.signUp { sucess->
+            viewModel.linkPhoneCredential{ sucess->
                 if(sucess){
                     navController.navigate(Pages.DataPage.route)
                 }
