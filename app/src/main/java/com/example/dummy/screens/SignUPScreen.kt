@@ -24,11 +24,18 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.dummy.User
 import com.example.dummy.screens.pages.Pages
 import com.example.dummy.viewModels.MainViewModel
 
 @Composable
 fun SignUpScreen(modifier: Modifier = Modifier , viewModel: MainViewModel , navController: NavController) {
+    val user = User(
+        name = "name",
+        email = viewModel.email.value,
+        phoneNumber = viewModel.phoneNumber.value,
+        type = "user"
+    )
     var name by remember { mutableStateOf("") }
     val email = viewModel.email
     val password = viewModel.password
@@ -68,14 +75,14 @@ fun SignUpScreen(modifier: Modifier = Modifier , viewModel: MainViewModel , navC
         )
 
         Button(onClick = {
-            viewModel.linkPhoneCredential{ sucess->
+            viewModel.linkPhoneCredential(user, onResult = {  sucess->
                 if(sucess){
                     navController.navigate(Pages.DataPage.route)
                 }
                 else{
                     Log.d("fault" , "SignUp fault")
                 }
-            }
+            })
         }) {
             Text(text = "Sign Up")
         }

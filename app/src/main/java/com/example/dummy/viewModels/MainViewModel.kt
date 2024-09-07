@@ -3,9 +3,12 @@ package com.example.dummy.viewModels
 import android.app.Activity
 import android.util.Log
 import android.widget.Toast
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.dummy.User
 import com.google.firebase.Firebase
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.EmailAuthProvider
@@ -16,6 +19,10 @@ import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.auth.PhoneAuthProvider.OnVerificationStateChangedCallbacks
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import java.util.concurrent.TimeUnit
 
 class MainViewModel() : ViewModel(){
@@ -31,6 +38,7 @@ class MainViewModel() : ViewModel(){
     private var _myAuth : FirebaseAuth = Firebase.auth
     private var verificationID = mutableStateOf("")
     lateinit var credential: PhoneAuthCredential
+    private var firestore : FirebaseFirestore = Firebase.firestore
 
     //Exposing the values
     val email = _email
@@ -138,60 +146,17 @@ class MainViewModel() : ViewModel(){
         _password.value = password
     }
 
-    fun signUp(onResult: (Boolean) -> Unit) {
-        _myAuth.createUserWithEmailAndPassword(email.value, password.value)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    onResult(true)
-                    linkPhoneCredential { result->
-
-                    }
-                } else {
-                    Log.e("MainViewModel", "Signup failed: ${task.exception?.message}", task.exception)
-                    onResult(false)
-                }
-            }
-    }
-//    fun createAccountAndLinkPhone(name: String, email: String, password: String, onResult: (Boolean) -> Unit) {
-//    credential = PhoneAuthProvider.getCredential(verificationID.value, otp.value)
-//        if (this::credential.isInitialized) {
-//            _myAuth.createUserWithEmailAndPassword(email, password)
-//                .addOnCompleteListener { authTask ->
-//                    if (authTask.isSuccessful) {val user = _myAuth.currentUser
-//                        val profileUpdates = UserProfileChangeRequest.Builder()
-//                            .setDisplayName(name)
-//                            .build()
-//
-//                        user?.updateProfile(profileUpdates)
-//                            ?.addOnCompleteListener { profileTask ->
-//                                if (profileTask.isSuccessful) {
-//                                    user.linkWithCredential(credential)
-//                                        .addOnCompleteListener { linkTask ->
-//                                            onResult(linkTask.isSuccessful)
-//                                        }
-//                                } else {
-//                                    Log.e("MainViewModel", "Profile update failed: ${profileTask.exception?.message}")
-//                                    onResult(false)
-//                                }
-//                            }
-//                    } else {
-//                        Log.e("MainViewModel", "Account creation failed: ${authTask.exception?.message}")
-//                        onResult(false)
-//                    }
-//                }
-//        } else {
-//            Log.e("MainViewModel", "Phone credential is not initialized.")
-//            onResult(false)
-//        }
-//    }
-
-    fun linkPhoneCredential(onResult: (Boolean) -> Unit) {
+    fun linkPhoneCredential(user1: User, onResult: (Boolean) -> Unit) {
         val user = _myAuth.currentUser
+
         val credential_email = EmailAuthProvider.getCredential(email.value , password.value)
             user?.linkWithCredential(credential_email)
                 ?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         onResult(true)
+                        viewModelScope.launch {
+                            SaveUserToFireBase(user = user1)
+                        }
                     } else {
                         Log.e(
                             "MainViewModel",
@@ -203,6 +168,14 @@ class MainViewModel() : ViewModel(){
                 }
     }
 
+    private suspend fun SaveUserToFireBase(user: User) {
+        try {
+            firestore.collection("users").document(user.email).set(user).await()
+            Log.d("MainViewModel", "User saved to Firestore")
+        } catch (e: Exception) {
+            Log.e("MainViewModel", "Error saving user to Firestore: ${e.message}", e)
+        }
+    }
 
 
     fun login(onResult: (Boolean) -> Unit) {
