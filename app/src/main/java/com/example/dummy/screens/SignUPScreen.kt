@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
@@ -31,20 +32,29 @@ import com.example.dummy.viewModels.MainViewModel
 @Composable
 fun SignUpScreen(modifier: Modifier = Modifier , viewModel: MainViewModel , navController: NavController) {
     val user = User(
-        name = "name",
+        name = viewModel.name.value,
         email = viewModel.email.value,
         phoneNumber = viewModel.phoneNumber.value,
-        type = "user"
+        isfarmer = viewModel.isfarmer.value
     )
-    var name by remember { mutableStateOf("") }
+    val name = viewModel.name
     val email = viewModel.email
     val password = viewModel.password
+    val isFarmer = viewModel.isfarmer
 
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        OutlinedTextField(
+            value = name.value,
+            onValueChange = {
+                name.value = it
+            },
+            label = { Text(text = "Enter Name") }
+        )
+
         OutlinedTextField(
             value = email.value,
             onValueChange = {
@@ -75,16 +85,31 @@ fun SignUpScreen(modifier: Modifier = Modifier , viewModel: MainViewModel , navC
         )
 
         Button(onClick = {
+            user.isfarmer = true
+            viewModel.linkPhoneCredential(user, onResult = {  sucess->
+                if(sucess){
+                    navController.navigate(Pages.FarmerDataPage.route)
+                }
+                else{
+                    Log.d("fault" , "SignUpfarmer fault")
+                }
+            })
+        }) {
+            Text(text = "Sign Up as farmer")
+        }
+
+        Button(onClick = {
+            user.isfarmer = false
             viewModel.linkPhoneCredential(user, onResult = {  sucess->
                 if(sucess){
                     navController.navigate(Pages.DataPage.route)
                 }
                 else{
-                    Log.d("fault" , "SignUp fault")
+                    Log.d("fault" , "SignUpCustomer fault")
                 }
             })
         }) {
-            Text(text = "Sign Up")
+            Text(text = "Sign Up as Customer")
         }
     }
 }

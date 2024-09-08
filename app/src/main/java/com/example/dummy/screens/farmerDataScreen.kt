@@ -17,7 +17,7 @@ import com.example.dummy.screens.pages.Pages
 import com.example.dummy.viewModels.MainViewModel
 
 @Composable
-fun DataScreen(modifier: Modifier = Modifier , viewModel: MainViewModel , navController: NavController) {
+fun FarmerDataScreen(modifier: Modifier = Modifier, viewModel: MainViewModel, navController: NavController) {
     val name =  viewModel.name
     val email = viewModel.email
     val number = viewModel.phoneNumber
@@ -26,7 +26,7 @@ fun DataScreen(modifier: Modifier = Modifier , viewModel: MainViewModel , navCon
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Welcome Customer")
+        Text(text = "Welcome farmer")
         Text(text = name.value)
         Text(text = email.value)
         Spacer(modifier = Modifier.height(12.dp))

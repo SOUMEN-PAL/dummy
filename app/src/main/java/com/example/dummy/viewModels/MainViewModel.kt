@@ -26,6 +26,8 @@ import kotlinx.coroutines.tasks.await
 import java.util.concurrent.TimeUnit
 
 class MainViewModel() : ViewModel(){
+    private var _name = mutableStateOf("")
+    private var _isfarmer = mutableStateOf(false)
     private var _email = mutableStateOf("")
     private var _password = mutableStateOf("")
     private var _phoneNumber = mutableStateOf("")
@@ -41,6 +43,8 @@ class MainViewModel() : ViewModel(){
     private var firestore : FirebaseFirestore = Firebase.firestore
 
     //Exposing the values
+    val name = _name
+    val isfarmer = _isfarmer
     val email = _email
     val password = _password
     val phoneNumber = _phoneNumber
@@ -148,15 +152,37 @@ class MainViewModel() : ViewModel(){
 
     fun linkPhoneCredential(user1: User, onResult: (Boolean) -> Unit) {
         val user = _myAuth.currentUser
-
         val credential_email = EmailAuthProvider.getCredential(email.value , password.value)
             user?.linkWithCredential(credential_email)
                 ?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        onResult(true)
-                        viewModelScope.launch {
-                            SaveUserToFireBase(user = user1)
+                        if(user1.isfarmer){
+                            viewModelScope.launch {
+                                try {
+                                    SavefarmerToFireBase(user = user1)
+                                    onResult(true)
+                                }catch (e: Exception) {
+                                    Log.e("MainViewModel", "Error saving farmer to Firestore: ${e.message}", e)
+                                    onResult(false)
+                                }
+                            }
+
                         }
+                        else {
+                        viewModelScope.launch {
+                            try {
+                                SaveUserToFireBase(user = user1)
+                                onResult(true)
+                            } catch (e: Exception) {
+                                Log.e(
+                                    "MainViewModel",
+                                    "Error saving user to Firestore: ${e.message}",
+                                    e
+                                )
+                                onResult(false)
+                            }
+                        }
+                    }
                     } else {
                         Log.e(
                             "MainViewModel",
@@ -174,6 +200,14 @@ class MainViewModel() : ViewModel(){
             Log.d("MainViewModel", "User saved to Firestore")
         } catch (e: Exception) {
             Log.e("MainViewModel", "Error saving user to Firestore: ${e.message}", e)
+        }
+    }
+    private suspend fun SavefarmerToFireBase(user: User) {
+        try {
+            firestore.collection("farmers").document(user.email).set(user).await()
+            Log.d("MainViewModel", "Farmer saved to Firestore")
+        } catch (e: Exception) {
+            Log.e("MainViewModel", "Error saving farmer to Firestore: ${e.message}", e)
         }
     }
 

@@ -30,6 +30,9 @@ fun Navigation(modifier: Modifier = Modifier , viewModel: MainViewModel , activi
         composable(route = Pages.DataPage.route){
             DataScreen(viewModel = viewModel , navController = navController)
         }
+        composable(route = Pages.FarmerDataPage.route){
+            FarmerDataScreen(viewModel = viewModel , navController = navController)
+        }
         composable(route = Pages.SignUpPage.route){
             SignUpScreen(viewModel = viewModel , navController = navController)
         }
