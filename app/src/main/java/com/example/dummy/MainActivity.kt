@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.dummy.Presentation.SignInScreen
 import com.example.dummy.screens.Navigation
 import com.example.dummy.ui.theme.DummyTheme
 import com.example.dummy.viewModels.MainViewModel
@@ -23,9 +24,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             var viewModel:MainViewModel = viewModel()
             DummyTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Navigation(viewModel = viewModel, activity = this , modifier = Modifier.padding(innerPadding))
-                }
+//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+//                    Navigation(viewModel = viewModel, activity = this , modifier = Modifier.padding(innerPadding))
+//                }
+                SignInScreen()
             }
         }
     }
