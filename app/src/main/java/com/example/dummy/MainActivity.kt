@@ -24,10 +24,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             var viewModel:MainViewModel = viewModel()
             DummyTheme {
-//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-//                    Navigation(viewModel = viewModel, activity = this , modifier = Modifier.padding(innerPadding))
-//                }
-                SignInScreen()
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    Navigation(viewModel = viewModel, activity = this , modifier = Modifier.padding(innerPadding))
+                }
             }
         }
     }
