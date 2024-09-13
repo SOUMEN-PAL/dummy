@@ -1,4 +1,4 @@
-package com.example.dummy.Presentation.Home
+package com.example.dummy.Presentation.Home.Banner
 
 import androidx.annotation.DrawableRes
 import com.example.dummy.R

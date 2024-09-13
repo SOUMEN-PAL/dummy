@@ -1,4 +1,4 @@
-package com.example.dummy.Presentation.Home
+package com.example.dummy.Presentation.Home.Banner
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -47,6 +47,6 @@ fun Homebanner(
 @Composable
 fun HomebannerPreview(){
     Homebanner(
-        banner =banners[0]
+        banner = banners[0]
     )
 }

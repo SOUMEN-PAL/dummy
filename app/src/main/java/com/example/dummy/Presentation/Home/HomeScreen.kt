@@ -10,6 +10,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.dummy.Presentation.Home.Banner.HomeBannerCategory
+import com.example.dummy.Presentation.Home.Banner.banners
+import com.example.dummy.Presentation.Home.Collections.AdditionalCategories
+import com.example.dummy.Presentation.Home.Collections.categories
 
 @Composable
 fun HomeScreen(){
@@ -23,8 +27,8 @@ fun HomeScreen(){
             modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp)
         ){
             item{ HomeBannerCategory(banners = banners) }
-            item{ AdditionalCategories(category = categories[0]) }
-            item{ AdditionalCategories(category = categories[1]) }
+            item{ AdditionalCategories(collection = categories[0]) }
+            item{ AdditionalCategories(collection = categories[1]) }
         }
 
     }

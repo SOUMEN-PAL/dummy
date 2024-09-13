@@ -1,5 +1,6 @@
-package com.example.dummy.Presentation.Home
+package com.example.dummy.Presentation.Home.Product
 
+import android.widget.Space
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -31,8 +33,8 @@ import androidx.compose.ui.unit.sp
 import com.example.dummy.R
 
 @Composable
-fun item(
-    item: Item,
+fun Product(
+    product: Product,
     modifier: Modifier = Modifier
 ){
     Card(onClick = { /*TODO*/ },
@@ -50,15 +52,15 @@ fun item(
 
                     .padding(16.dp),
             ) {
-                Image(painter = painterResource(id = item.image),
+                Image(painter = painterResource(id = product.image),
                     contentDescription = null,
                     modifier = Modifier
                         .aspectRatio(16f / 9f)
                         .align(Alignment.CenterHorizontally)
                 )
                 Spacer(Modifier.height(20.dp))
-                    Text(text = item.name, fontSize = 16.sp)
-                    Text(text = item.description,fontSize = 14.sp, color = colorResource(id = R.color.grey))
+                    Text(text = product.name, fontSize = 16.sp)
+                    Text(text = product.description,fontSize = 14.sp, color = colorResource(id = R.color.grey))
 
                 Spacer(Modifier.weight(1f))
                 Row(
@@ -66,7 +68,7 @@ fun item(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ){
-                    Text(text = item.price,fontSize = 18.sp)
+                    Text(text = product.price,fontSize = 18.sp)
                     Button(onClick = { /*TODO*/ },
                         modifier = Modifier.size(45.dp),
                         shape = RoundedCornerShape(17.dp),
@@ -86,10 +88,11 @@ fun item(
 
             }
     }
+    Spacer(Modifier.width(10.dp))
 }
 
 @Preview(showBackground = false)
 @Composable
-fun itemPreview(){
-    item(item = items[0])
+fun ProductPreview(){
+    Product(product = products[0])
 }

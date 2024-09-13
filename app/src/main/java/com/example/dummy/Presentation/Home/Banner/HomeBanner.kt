@@ -1,4 +1,4 @@
-package com.example.dummy.Presentation.Home
+package com.example.dummy.Presentation.Home.Banner
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
