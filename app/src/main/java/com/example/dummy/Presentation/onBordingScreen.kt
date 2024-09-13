@@ -16,10 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.VectorProperty
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -57,9 +54,9 @@ fun onBordingScreen(){
                 modifier = Modifier.size(width = 353.dp, height = 60.dp),
                 shape = RoundedCornerShape(19.dp),
                 colors = ButtonColors(
-                    containerColor = colorResource(id = R.color.onboardbutton),
+                    containerColor = colorResource(id = R.color.maingreen),
                     contentColor = Color.White,
-                    disabledContainerColor = colorResource(id = R.color.onboardbutton),
+                    disabledContainerColor = colorResource(id = R.color.maingreen),
                     disabledContentColor = Color.White
                 )
             ) {
