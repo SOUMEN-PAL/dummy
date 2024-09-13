@@ -5,7 +5,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.dummy.Presentation.Explore.ExploreScreen
 import com.example.dummy.Presentation.Home.HomeScreen
+import com.example.dummy.Presentation.Search.SearchScreen
 import com.example.dummy.ui.theme.DummyTheme
 import com.example.dummy.viewModels.MainViewModel
 
@@ -19,7 +21,7 @@ class MainActivity : ComponentActivity() {
 //                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 //                    Navigation(viewModel = viewModel, activity = this , modifier = Modifier.padding(innerPadding))
 //                }
-                HomeScreen()
+                SearchScreen()
             }
         }
     }

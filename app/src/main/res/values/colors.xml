@@ -13,5 +13,11 @@
     <color name="SearchBarText">#FF7C7C7C</color>
     <color name="SearchBar">#FFF2F3F2</color>
     <color name="temCard">#FFFDFFFC</color>
-    <color name="grey">#FF7C7C7C</color>
+    <color name="grey">#FF7C7C7C</color>\
+    <color name="lightgreen">#1A53B175</color>
+    <color name="lightred">#40F7A593</color>
+    <color name="lightyellow">#40FDE598</color>
+    <color name="bordergreen">#CC53B175</color>
+    <color name="borderred">#F7A593</color>
+    <color name="borderellow">#FDE598</color>
 </resources>

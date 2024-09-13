@@ -38,7 +38,8 @@ fun Product(
     modifier: Modifier = Modifier
 ){
     Card(onClick = { /*TODO*/ },
-        modifier = Modifier
+        modifier = modifier
+//            .padding(8.dp)
             .size(width = 173.dp, height = 248.dp),
         colors = CardDefaults.cardColors(
             containerColor = colorResource(id = R.color.temCard)

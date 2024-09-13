@@ -8,7 +8,7 @@ data class Collection(
     val products: List<Product>
 )
 
-val categories = listOf(
+val collections = listOf(
     Collection(name = "Exclusive Offer", products = products),
     Collection(name = "Best Selling", products = products),
 )

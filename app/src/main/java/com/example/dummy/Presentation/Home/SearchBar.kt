@@ -34,7 +34,7 @@ fun MySearchBar(
         onSearch = onSearch,
         active = active,
         onActiveChange = onActiveChange,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         colors = SearchBarDefaults.colors(

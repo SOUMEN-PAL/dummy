@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
@@ -24,7 +22,7 @@ import com.example.dummy.Presentation.Home.Product.products
 import com.example.dummy.R
 
 @Composable
-fun AdditionalCategories(
+fun HomeCollections(
     collection: Collection
 ){
         Column(
@@ -44,22 +42,15 @@ fun AdditionalCategories(
             LazyRow() {
                 items(products){product->
                     Product(product)
-//                    Spacer(modifier = Modifier.width(10.dp))
                 }
             }
-//            Row(
-//                modifier = Modifier.fillMaxWidth(),
-//                horizontalArrangement = Arrangement.SpaceBetween
-//            ) {
-//                Product(product = collection.products.get(0) , modifier = Modifier.weight(.5f))
-//                Product(product = collection.products.get(1), modifier = Modifier.weight(.5f))
-//            }
         }
+
     Spacer(modifier = Modifier.height(16.dp))
 }
 
 @Preview(showBackground = true)
 @Composable
 fun AdditionalCategoriesPreview(){
-    AdditionalCategories(collection = categories[0])
+    HomeCollections(collection = collections[0])
 }
