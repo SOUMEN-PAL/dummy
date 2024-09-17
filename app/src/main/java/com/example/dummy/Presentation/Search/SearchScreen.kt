@@ -13,13 +13,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.dummy.Presentation.Explore.Category
-import com.example.dummy.Presentation.Explore.TextSection
-import com.example.dummy.Presentation.Explore.categories
 import com.example.dummy.Presentation.Home.BottomBar.BottomBar
-import com.example.dummy.Presentation.Home.Product.Product
+import com.example.dummy.Presentation.Home.Product.ProductDataItems
 import com.example.dummy.Presentation.Home.Product.products
-import com.example.dummy.Presentation.Home.SearchSection
 
 @Composable
 fun SearchScreen(){
@@ -40,7 +36,7 @@ fun SearchScreen(){
             ) {
                 repeat(5){
                     items(products){ product->
-                        Product(product = product, modifier = Modifier.padding(8.dp))
+                        ProductDataItems(product = product, modifier = Modifier.padding(8.dp))
                     }
                 }
             }

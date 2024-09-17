@@ -25,7 +25,9 @@ import androidx.compose.ui.unit.dp
 import com.example.dummy.R
 
 @Composable
-fun TextSection(){
+fun TextSection(
+    text: String
+){
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -39,7 +41,7 @@ fun TextSection(){
             verticalAlignment = Alignment.CenterVertically
         ) {
 
-            Text(text = "Find Products")
+            Text(text = text)
         }
     }
 }

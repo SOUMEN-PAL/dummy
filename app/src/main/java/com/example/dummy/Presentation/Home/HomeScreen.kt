@@ -14,8 +14,8 @@ import androidx.compose.ui.unit.dp
 import com.example.dummy.Presentation.Home.Banner.HomeBanner
 import com.example.dummy.Presentation.Home.Banner.banners
 import com.example.dummy.Presentation.Home.BottomBar.BottomBar
-import com.example.dummy.Presentation.Home.Collections.HomeCollections
-import com.example.dummy.Presentation.Home.Collections.collections
+//import com.example.dummy.Presentation.Home.Collections.HomeCollections
+//import com.example.dummy.Presentation.Home.Collections.collections
 
 @Composable
 fun HomeScreen(){
@@ -38,8 +38,8 @@ fun HomeScreen(){
                     .padding(horizontal = 16.dp)
             ){
                 item{ HomeBanner(banners = banners) }
-                item{ HomeCollections(collection = collections[0]) }
-                item{ HomeCollections(collection = collections[1]) }
+//                item{ HomeCollections(collection = collections[0]) }
+//                item{ HomeCollections(collection = collections[1]) }
             }
 
         }

@@ -20,4 +20,5 @@
     <color name="bordergreen">#CC53B175</color>
     <color name="borderred">#F7A593</color>
     <color name="borderellow">#FDE598</color>
+    <color name="lighthgrey">#BCBCBC</color>
 </resources>

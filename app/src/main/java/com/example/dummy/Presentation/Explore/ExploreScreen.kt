@@ -16,39 +16,39 @@ import androidx.compose.ui.unit.dp
 import com.example.dummy.Presentation.Home.BottomBar.BottomBar
 import com.example.dummy.Presentation.Home.SearchSection
 
-
-@Composable
-fun ExploreScreen(){
-    Scaffold(
-        bottomBar = { BottomBar() }
-    ) {pv->
-        Column(
-            Modifier
-                .fillMaxSize()
-                .padding(pv),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top
-        ) {
-            TextSection()
-            SearchSection()
-
-            LazyVerticalGrid(columns = GridCells.Fixed(2),
-                    modifier = Modifier.padding(horizontal = 16.dp)
-                ) {
-                repeat(5){
-                    items(categories){category->
-                        Category(category = category, onCardClicked = { /*TODO*/ })
-                    }
-                }
-            }
-
-        }
-    }
-
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ExploreScreenPreview(){
-    ExploreScreen()
-}
+//
+//@Composable
+//fun ExploreScreen(){
+//    Scaffold(
+//        bottomBar = { BottomBar() }
+//    ) {pv->
+//        Column(
+//            Modifier
+//                .fillMaxSize()
+//                .padding(pv),
+//            horizontalAlignment = Alignment.CenterHorizontally,
+//            verticalArrangement = Arrangement.Top
+//        ) {
+//            TextSection(text = "Find Products")
+//            SearchSection()
+//
+//            LazyVerticalGrid(columns = GridCells.Fixed(2),
+//                    modifier = Modifier.padding(horizontal = 16.dp)
+//                ) {
+//                repeat(5){
+//                    items(categories){category->
+//                        Category(category = category, onCardClicked = { /*TODO*/ })
+//                    }
+//                }
+//            }
+//
+//        }
+//    }
+//
+//}
+//
+//@Preview(showBackground = true)
+//@Composable
+//fun ExploreScreenPreview(){
+//    ExploreScreen()
+//}

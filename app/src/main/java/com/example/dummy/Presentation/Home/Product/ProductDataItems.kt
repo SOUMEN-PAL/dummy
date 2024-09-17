@@ -1,6 +1,5 @@
 package com.example.dummy.Presentation.Home.Product
 
-import android.widget.Space
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -33,7 +32,7 @@ import androidx.compose.ui.unit.sp
 import com.example.dummy.R
 
 @Composable
-fun Product(
+fun ProductDataItems(
     product: Product,
     modifier: Modifier = Modifier
 ){
@@ -53,7 +52,7 @@ fun Product(
 
                     .padding(16.dp),
             ) {
-                Image(painter = painterResource(id = product.image),
+                Image(painter = painterResource(id = R.drawable.banana),
                     contentDescription = null,
                     modifier = Modifier
                         .aspectRatio(16f / 9f)
@@ -95,5 +94,5 @@ fun Product(
 @Preview(showBackground = false)
 @Composable
 fun ProductPreview(){
-    Product(product = products[0])
+    ProductDataItems(product = products[0])
 }

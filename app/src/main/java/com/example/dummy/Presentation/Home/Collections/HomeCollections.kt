@@ -17,13 +17,14 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.dummy.Presentation.Home.Product.Product
+import com.example.dummy.Presentation.Home.Product.ProductDataItems
 import com.example.dummy.Presentation.Home.Product.products
+//import com.example.dummy.Presentation.Home.Product.products
 import com.example.dummy.R
 
 @Composable
 fun HomeCollections(
-    collection: Collection
+//    collection: Collection
 ){
         Column(
             modifier = Modifier
@@ -34,23 +35,17 @@ fun HomeCollections(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(text = collection.name, fontSize = 24.sp)
+//                Text(text = collection.name, fontSize = 24.sp)
                 TextButton(onClick = { /*TODO*/ }) {
                     Text(text = "See all", color = colorResource(id = R.color.maingreen))
                 }
             }
             LazyRow() {
                 items(products){product->
-                    Product(product)
+                    ProductDataItems(product)
                 }
             }
         }
 
     Spacer(modifier = Modifier.height(16.dp))
-}
-
-@Preview(showBackground = true)
-@Composable
-fun AdditionalCategoriesPreview(){
-    HomeCollections(collection = collections[0])
 }
